@@ -17,11 +17,12 @@ const Social = () => {
     const navigate = useNavigate()
     let from = location.state?.from?.pathname || '/';
     useEffect(() => {
-        if (googleUser) {
+        if (token) {
+
             return navigate(from, { replace: true })
         }
 
-    }, [googleUser])
+    }, [token,from,navigate])
 
     return (
         <button className='input input-bordered text-xl' onClick={handleGoogleLogin}>Continue With Google</button>

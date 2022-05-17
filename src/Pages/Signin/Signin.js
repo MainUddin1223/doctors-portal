@@ -5,6 +5,7 @@ import auth from '../../firebase.init';
 import Social from '../Shared/Social';
 import { useForm } from "react-hook-form";
 import Spinner from '../Shared/Spinner';
+import useToken from '../../Hooks/useToken';
 
 const Signin = () => {
 
@@ -22,13 +23,14 @@ const Signin = () => {
     };
     const location = useLocation()
     const navigate = useNavigate()
+    const [token]=useToken(user)
     let from = location.state?.from?.pathname || '/';
     useEffect(() => {
 
-        if (user) {
+        if (token) {
             return navigate(from, { replace: true })
         }
-    }, [user])
+    }, [token,navigate,from])
     if (loading) {
         return <Spinner></Spinner>
     }

@@ -7,7 +7,12 @@ const MyAppointment = () => {
     const [appointments, setAppointments] = useState([]);
     useEffect(() => {
         if (user) {
-            fetch(`http://localhost:5000/appointment?patient=${user.email}`)
+            fetch(`http://localhost:5000/appointment?patient=${user.email}`, {
+                method: 'GET',
+                headers: {
+                    'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
                 .then(res => res.json())
                 .then(data => setAppointments(data))
         }
@@ -16,8 +21,8 @@ const MyAppointment = () => {
 
     return (
         <div>
-            <div class="overflow-x-auto">
-                <table class="table w-full">
+            <div className="overflow-x-auto">
+                <table className="table w-full">
                     {/* <!-- head --> */}
                     <thead>
                         <tr>
@@ -33,7 +38,7 @@ const MyAppointment = () => {
                         {
                             appointments.map(
                                 (appointment, index) =>
-                                    <tr class="hover" key={index}>
+                                    <tr className="hover" key={index}>
                                         <th>{index + 1}</th>
                                         <th>{appointment.patient}</th>
                                         <td>{appointment.date}</td>
