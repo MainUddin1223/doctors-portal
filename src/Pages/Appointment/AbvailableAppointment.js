@@ -8,9 +8,17 @@ import Spinner from '../Shared/Spinner'
 const AbvailableAppointment = ({ date }) => {
     const [treatment, setTreatment] = useState(null);
     const formatedDate = format(date, 'PP');
-    const {  isLoading, data: services,error,refetch } = useQuery(['available',formatedDate], () => 
-        fetch(`http://localhost:5000/available?date=${formatedDate}`).then(res => res.json())
+    const url = `http://localhost:5000/available?date=${formatedDate}`
+    const { isLoading, data: services, error, refetch } = useQuery(['available', formatedDate], () =>
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        }).then(res => res.json())
     )
+
     if (isLoading) {
         return <Spinner></Spinner>
     }

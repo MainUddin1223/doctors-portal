@@ -24,6 +24,7 @@ const Signin = () => {
     const location = useLocation()
     const navigate = useNavigate()
     const [token]=useToken(user)
+    console.log(token);
     let from = location.state?.from?.pathname || '/';
     useEffect(() => {
 
