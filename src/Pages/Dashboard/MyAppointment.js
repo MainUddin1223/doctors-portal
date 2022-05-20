@@ -15,7 +15,7 @@ const MyAppointment = () => {
     const [appointments, setAppointments] = useState([]);
     useEffect(() => {
         if (user) {
-            fetch(`http://localhost:5000/appointment?patient=${user.email}`, {
+            fetch(`https://guarded-shore-68271.herokuapp.com/appointment?patient=${user.email}`, {
                 method: 'GET',
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`

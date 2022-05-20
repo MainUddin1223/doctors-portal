@@ -26,7 +26,11 @@ const Deashboard = () => {
                         <li><Link to='/dashboard'>My Appointment</Link></li>
                         <li><Link to='/dashboard/review'>Review</Link></li>
                         <li><Link to='/dashboard/history'>History</Link></li>
-                        {admin && <li><Link to='/dashboard/users'>All Users</Link></li>}
+                        {admin && <>
+                            <li><Link to='/dashboard/users'>All Users</Link></li>
+                            <li><Link to='/dashboard/addDoctor'>Add a Doctor</Link></li>
+                            <li><Link to='/dashboard/manageDoctors'>Manage Doctor</Link></li>
+                        </>}
                     </ul>
 
                 </div>

@@ -6,7 +6,7 @@ import UsarTable from './UsarTable';
 const AllUsers = () => {
     // const [users, setUsers] = useState([]);
     // useEffect(() => {
-    //     fetch('http://localhost:5000/users')
+    //     fetch('https://guarded-shore-68271.herokuapp.com/users')
     //         .then(res => res.json())
     //         .then(data => setUsers(data))
     // }, [users])
@@ -16,7 +16,7 @@ const AllUsers = () => {
     //     }
     //     return res => res.json()
     // })
-    const { data: users, isLoading, refetch } = useQuery('users', () => fetch('http://localhost:5000/users', {
+    const { data: users, isLoading, refetch } = useQuery('users', () => fetch('https://guarded-shore-68271.herokuapp.com/users', {
         method: "GET",
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`

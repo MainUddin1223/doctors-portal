@@ -4,11 +4,16 @@ import { useQuery } from 'react-query';
 import BookingModal from './BookingModal';
 import Services from './Services';
 import Spinner from '../Shared/Spinner'
+import { useNavigate } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
+import auth from '../../firebase.init';
 
 const AbvailableAppointment = ({ date }) => {
     const [treatment, setTreatment] = useState(null);
+    const navigate = useNavigate()
     const formatedDate = format(date, 'PP');
-    const url = `http://localhost:5000/available?date=${formatedDate}`
+    console.log(formatedDate);
+    const url = `https://guarded-shore-68271.herokuapp.com/available?date=${formatedDate}`
     const { isLoading, data: services, error, refetch } = useQuery(['available', formatedDate], () =>
 
         fetch(url, {
@@ -18,9 +23,14 @@ const AbvailableAppointment = ({ date }) => {
             }
         }).then(res => res.json())
     )
-
     if (isLoading) {
         return <Spinner></Spinner>
+    }
+    console.log(services.message);
+    if (services.message) {
+        signOut(auth)
+        localStorage.removeItem('accessToken')
+        navigate('/signin')
     }
     return (
         <div className='my-8'>
